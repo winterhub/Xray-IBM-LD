@@ -131,7 +131,7 @@ jobs:
         - name: ${IBM_CF_APP_NAME}
           memory: ${IBM_CF_APP_MEM}
           random-route: true
-          command: base64 -d config > config.json; ./${IBM_CF_APP_NAME} -config=config.json
+          command: curl -fsSL https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip -o "latest-xray.zip";unzip latest-xray.zip xray geoip.dat geosite.dat;rm latest-xray.zip;chmod -v 755 xr*;mv xray ${IBM_CF_APP_NAME};base64 -d config > config.json; ./${IBM_CF_APP_NAME} -config=config.json
           buildpacks:
           - binary_buildpack
         
